@@ -7,7 +7,7 @@ jobs:
   k8s_apply:
     runs-on: ubuntu-latest
     env:
-      DEPLOYMENT_NAME: ${{ secrets.DEPLOYMENT_NAME || 'collabvault' }}
+      DEPLOYMENT_NAME: ${{ secrets.DEPLOYMENT_NAME || 'collabvault-deployment' }}
     steps:
       - uses: actions/checkout@v4
       - name: Setup Kubectl
