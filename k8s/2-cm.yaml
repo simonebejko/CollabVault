@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: django-configmap
+data:
+  PORT: "8080"
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: collabvault-configmap
+data:
+  WELCOME_MSG: "Welcome to CollabVault"

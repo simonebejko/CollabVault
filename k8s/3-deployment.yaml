@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collabvault-deployment
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: my-container
+          image: simonebejko/collabvault:latest
+          env:
+            - name: PORT
+              value: "8080"
+            - name: VERSION
+              value: "1.0.1"
+            - name: WELCOME_MSG
+              valueFrom: 
+                configMapKeyRef:
+                  name: collabvault-configmap
+                  key: WELCOME_MSG
+          # envFrom:
+          #   - configMapRef:
+          #       name: django-configmap
+          envFrom:
+            - secretRef:
+                name: collabvault-secret
+          ports:
+            - containerPort: 8080
