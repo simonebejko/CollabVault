@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: collabvault-service
+  name: collabvault-service # <srv-name>.<srv-namespace>.svc.cluster.local
 spec:
   selector:
     app: web
-  type: LoadBalancer
+  # type: LoadBalancer
+  type: ClusterIP
   ports:
     - name: http
       protocol: TCP
