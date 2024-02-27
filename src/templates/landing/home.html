@@ -1,1 +1,16 @@
-<h1>Hello World</h1>
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<body class="bg-gradient-to-t from-[#6391a0] to-[#a8c4c8] h-screen flex items-center justify-center">
+    <div class="text-center">
+        <img src="././static/images/collabvault-logo.png" alt="CollabVault Logo" class="mx-auto mb-4"
+            style="width: 200px; height: auto;">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl"
+            style="color: #1C2A30;">
+            Welcome to CollabVault.</h1>
+    </div>
+</body>
+
+{% endblock %}
