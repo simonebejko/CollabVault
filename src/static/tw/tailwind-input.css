@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .tw-form {
+        @apply max-w-sm mx-auto bg-white p-6 rounded-lg shadow-lg;
+    }
+
+    .tw-form .errorlist {
+        @apply p-4 mb-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400;
+    }
+
+    .tw-form .errorlist+input {
+        @apply border-red-500 !important;
+    }
+
+    .tw-form .errorlist+textarea {
+        @apply border-red-500 !important;
+    }
+
+    .tw-form div {
+        @apply mb-5;
+    }
+
+    .tw-form label {
+        @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+    }
+
+    .tw-form input[type=text] {
+        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cv focus:borderc-cv block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+    }
+
+    .tw-form textarea {
+        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cv focus:border-cv block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+    }
+
+    .tw-form [type=submit] {
+        @apply text-white bg-cv hover:cv focus:ring-4 focus:outline-none focus:ring-cv font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-cv dark:hover:bg-cv dark:focus:ring-cv w-full;
+    }
+}

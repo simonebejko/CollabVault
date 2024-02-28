@@ -20,13 +20,17 @@ module.exports = {
       },
       white: colors.white,
       black: colors.black,
-      cv: "#007cae",
+      cv: "1c2a30",
       cvBlue: {
-        100: "#007cad"
+        100: "#a8c4c8",
+        900: "#6391a0",
       },
       stone: colors.stone,
       sky: colors.sky,
       violet: colors.violet,
+      gray: colors.gray,
+      blue: colors.blue,
+      red: colors.red
     },
     fontFamily: {
       'body': [
