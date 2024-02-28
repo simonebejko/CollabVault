@@ -6,6 +6,10 @@ from collabvault.utils.generators import unique_slugify
 User = settings.AUTH_USER_MODEL
 
 # Create your models here.
+class AnonymousProject():
+    value = None
+    is_activated = False
+
 class Project(models.Model):
     owner = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=120, null=True)
@@ -14,6 +18,10 @@ class Project(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
+    @property
+    def is_activated(self):
+        return True
+    
     def save(self, *args, **kwargs):
         if not self.handle:
             self.handle = unique_slugify(self, slug_field='handle')
