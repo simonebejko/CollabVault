@@ -2,10 +2,7 @@
 
 {% block content %}
 
-<body class="bg-gradient-to-t from-[#6391a0] to-[#a8c4c8] h-screen flex items-center justify-center">
-{% for object in object_list %}
-{{ object.title }}
-{% endfor %}
-</body>
+<h1>{{ instance.title }}</h1>
+{% include 'items/snippets/form.html' with form=form btn_label="Save" %}
 
 {% endblock content %}
