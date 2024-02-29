@@ -1,7 +1,10 @@
 <body class="bg-gradient-to-t from-[#6391a0] to-[#a8c4c8] h-screen flex items-center justify-center">
     <form class="tw-form" method="post" action="">{% csrf_token %}
         <h1 class="p-2 text-lg font-semibold mb-4" style="color: #1c2a30;">
-            Create a new item for {{ request.project.title }}
+            {% if update_label %}{{ update_label }} "{{ instance.title }}"
+            {% elif delete_label %}{{ delete_label }} "{{ instance.title}}?"
+            {% else %}Create a new item for "{{ request.project.title }}"
+            {% endif %}
         </h1>
         {{ form.as_div }}
         <div>

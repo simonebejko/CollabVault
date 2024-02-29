@@ -5,6 +5,14 @@ from .models import Item
 
 # Create your views here.
 @login_required
+def item_delete_view(request, id=None):
+    instance = get_object_or_404(Item, id=id, project=request.project)
+    if request.method == 'POST':
+        instance.delete()
+        return redirect("items:list")
+    return render(request, "items/delete.html", {"instance": instance})
+
+@login_required
 def item_list_view(request):
     object_list = Item.objects.filter(project=request.project)
     return render(request, "items/list.html", {'object_list': object_list})
