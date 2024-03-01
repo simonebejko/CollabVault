@@ -30,7 +30,8 @@ module.exports = {
       violet: colors.violet,
       gray: colors.gray,
       blue: colors.blue,
-      red: colors.red
+      red: colors.red,
+      green: colors.green
     },
     fontFamily: {
       'body': [

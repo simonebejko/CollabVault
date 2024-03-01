@@ -17,10 +17,10 @@ Including another URLconf
 from django.urls import path
 from . import views
 
-app_name='items'
+app_name='projects'
 urlpatterns = [
-    path("", views.item_list_view, name='list'),
-    path("<int:id>/", views.item_detail_update_view, name='detail'),
-    path("<int:id>/delete/", views.item_delete_view, name='delete'),
-    path("create/", views.item_create_view, name='create'),
+    path("", views.project_list_view, name='list'),
+    path("create/", views.project_create_view, name='create'),
+    path("<slug:handle>/", views.project_detail_update_view, name='detail'),
+    path("<slug:handle>/delete/", views.project_delete_view, name='delete'),
 ]

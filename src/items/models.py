@@ -6,7 +6,6 @@ from django.urls import reverse
 User = settings.AUTH_USER_MODEL
 
 # Create your models here.
-
 class Item(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     added_by = models.ForeignKey(User, related_name='items_added', on_delete=models.SET_NULL, null=True)
@@ -23,5 +22,4 @@ class Item(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        # return f"/items/{self.id}/"
         return reverse("items:detail", kwargs={"id": self.id})

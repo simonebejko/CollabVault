@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if request.project == instance %}
+    {% include 'projects/snippets/list.html' with object_list=items_qs %}
+{% else %}
+    <div>
+        <p>Activate project to see its items.</p>
+    </div>
+{% endif %}
+{% include 'projects/snippets/form.html' with btn_label="Save" update_label="Edit" %}
+
+{% endblock content %}
