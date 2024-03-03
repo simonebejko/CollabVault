@@ -2,11 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from . import forms
 from .models import Item
-from projects import cache as projects_cache
 from projects.decorators import project_required
 from django.urls import reverse
-from django_htmx.http import HttpResponseClientRefresh, HttpResponseClientRedirect
 from collabvault import http
+from django.http import QueryDict
 
 # Create your views here.
 @project_required
@@ -24,9 +23,34 @@ def item_detail_inline_update_view(request, id=None):
     instance = get_object_or_404(Item, id=id, project=request.project)
     if not request.htmx:
         detail_url = instance.get_absolute_url()
-        return redirect(detail_url)
+        return redirect(detail_url)   
     template_name = "items/snippets/table-row-edit.html"
     success_template = "items/snippets/table-row.html"
+    if f"{request.method}".lower() == "patch":
+        query_dict = QueryDict(request.body)
+        data = query_dict.dict()
+        form = forms.ItemPatchForm(data)
+        if form.is_valid():
+            valid_data = form.cleaned_data
+            changed = False
+            for k, v in valid_data.items():
+                changed = True
+                if v == "":
+                    continue
+                if not v:
+                    continue
+                setattr(instance, k , v)
+            if changed:
+                instance.save()
+        template_name = success_template
+        choices = Item.ItemStatus.choices
+        context = {
+            "instance": instance,
+            "choices": choices,
+            "form": form,
+        }
+        return render(request, template_name, context)
+    
     form = forms.ItemInlineForm(request.POST or None, instance=instance)
     if form.is_valid():
         item_obj = form.save(commit=False)
