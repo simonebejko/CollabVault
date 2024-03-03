@@ -20,11 +20,11 @@ from landing import views as landing_views
 from projects import views as project_views 
 
 urlpatterns = [
-    path('', landing_views.home_page_view),
+    path('', landing_views.home_page_view, name='home'),
     path('items/', include('items.urls')),
     path('projects/', include('projects.urls')),
-    path('about/', landing_views.about_page_view),
-    path('activate/project/<slug:handle>/', project_views.activate_project_view),
-    path('deactivate/project/<slug:handle>/', project_views.deactivate_project_view),
+    path('about/', landing_views.about_page_view, name='about'),
+    path('activate/project/<slug:handle>/', project_views.activate_project_view, name='activate_project'),
+    path('deactivate/project/', project_views.deactivate_project_view, name='deactivate_project'),
     path('admin/', admin.site.urls),
 ]

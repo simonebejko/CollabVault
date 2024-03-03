@@ -6,9 +6,10 @@
     {% include 'projects/snippets/list.html' with object_list=items_qs %}
 {% else %}
     <div>
-        <p>Activate project to see its items.</p>
+        <a href="{{ instance.get_activation_url }}">Activate Project</a>
     </div>
 {% endif %}
-{% include 'projects/snippets/form.html' with btn_label="Save" update_label="Edit" %}
+
+{% include 'projects/snippets/form.html' with form=form btn_label="Save" %}
 
 {% endblock content %}

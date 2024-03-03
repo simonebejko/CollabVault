@@ -1,16 +1,20 @@
 {% extends "base.html" %}
 
-
 {% block content %}
-
-<body class="bg-gradient-to-t from-[#6391a0] to-[#a8c4c8] h-screen flex items-center justify-center">
-    <div class="text-center">
-        <img src="././static/images/collabvault-logo.png" alt="CollabVault Logo" class="mx-auto mb-4"
-            style="width: 200px; height: auto;">
-        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl"
-            style="color: #1C2A30;">
-            Welcome to CollabVault.</h1>
-    </div>
+<body>
+    <section class="bg-white dark:bg-gray-900">
+        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+            <div class="mr-auto place-self-center lg:col-span-7">
+                <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">Welcome to CollabVault.</h1>
+                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Where collaboration meets simplicity.</p>
+                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Share and access project assets effortlessly and securely, boosting team productivity and streamlining project management.</p>
+            </div>
+            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                <img class="drop-shadow-2xl rounded-xl" src="https://images.unsplash.com/photo-1484807352052-23338990c6c6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="mockup">
+            </div>                
+        </div>
+    </section>
 </body>
+</html>
 
 {% endblock %}

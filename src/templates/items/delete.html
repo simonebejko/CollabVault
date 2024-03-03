@@ -2,6 +2,7 @@
 
 {% block content %}
 
-{% include 'items/snippets/form.html' with btn_label="Delete" delete_label="Delete" %}
+<h1>Are you sure you want to delete {{ instance.title }}?</h1>
+{% include 'items/snippets/form.html' with btn_label="Delete" delete=True %}
 
 {% endblock content %}

@@ -2,7 +2,10 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  content: ["./src/templates/**/*.{html,js}"],
+  content: [
+    "./src/templates/**/*.{html,js}",
+    "./node_modules/flowbite/**/*.js"
+  ],
   theme: {
     colors: {
       primary: {
@@ -20,10 +23,12 @@ module.exports = {
       },
       white: colors.white,
       black: colors.black,
-      cv: "1c2a30",
+      cv: {
+        "100": "1c2a30",
+      },
       cvBlue: {
-        100: "#a8c4c8",
-        900: "#6391a0",
+        "100": "#a8c4c8",
+        "900": "#6391a0",
       },
       stone: colors.stone,
       sky: colors.sky,
@@ -31,7 +36,8 @@ module.exports = {
       gray: colors.gray,
       blue: colors.blue,
       red: colors.red,
-      green: colors.green
+      green: colors.green,
+      neutral: colors.neutral
     },
     fontFamily: {
       'body': [
@@ -72,5 +78,5 @@ module.exports = {
     extend: {},
   },
 
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 }
