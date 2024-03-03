@@ -24,5 +24,8 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse("items:detail", kwargs={"id": self.id})
     
+    def get_edit_url(self):
+        return reverse("items:edit", kwargs={"id": self.id})
+    
     def get_delete_url(self):
         return reverse("items:delete", kwargs={"id": self.id})
