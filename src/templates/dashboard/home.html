@@ -8,7 +8,7 @@
         <span class="block htmx:hidden">Refresh</span>
         <span class="hidden htmx:block">Refreshing...</span>
     </button>
-    <div hx-get="{{ item_list_url }}" hx-trigger="load, click from:#refresh-button, refresh-list-view from:body">
+    <div hx-get="{{ item_list_url }}" hx-trigger="load, click from:#refresh-button">
         Loading ...
     </div>
 </div>
