@@ -33,8 +33,20 @@ class Item(models.Model):
             self.status_changed_at = timezone.now()
         super().save(*args, **kwargs)
 
+    def get_prefix(self, trailing_slash=True):
+        """
+        S3 Prefix
+        """
+        project_prefix = self.project.get_prefix(trailing_slash=False)
+        if trailing_slash:
+            return f"{project_prefix}/items/{self.id}/"
+        return f"{project_prefix}/items/{self.id}" 
+
     def get_absolute_url(self):
         return reverse("items:detail", kwargs={"id": self.id})
+    
+    def get_files_url(self):
+        return reverse("items:files", kwargs={"id": self.id})
     
     def get_edit_url(self):
         return reverse("items:edit", kwargs={"id": self.id})
