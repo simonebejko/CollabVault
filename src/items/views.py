@@ -9,6 +9,7 @@ from django.http import QueryDict
 import s3
 import pathlib
 from collabvault.env import config
+import mimetypes
 
 AWS_ACCESS_KEY_ID=config("AWS_ACCESS_KEY_ID", default=None)
 AWS_SECRET_ACCESS_KEY=config("AWS_SECRET_ACCESS_KEY", default=None)
@@ -43,10 +44,38 @@ def item_files_view(request, id=None):
             size = c.get('Size')
             if size == 0:
                 continue
+            name = pathlib.Path(key).name
+            _type = None
+            try:
+                _type = mimetypes.guess_type(name)[0]
+            except:
+                pass
+            url = client.generate_presigned_url(
+                'get_object',
+                Params = {
+                    'Bucket': AWS_BUCKET_NAME,
+                    'Key': key,
+                },
+                ExpiresIn=3600,
+            )
+            download_url = client.generate_presigned_url(
+                'get_object',
+                Params = {
+                    'Bucket': AWS_BUCKET_NAME,
+                    'Key': key,
+                    'ResponseContentDisposition': 'attachment'
+                },
+                ExpiresIn=3600,
+            )
+            is_image = 'image' in str(_type)
             updated = c.get('LastModified')
             data = {
                 'key': key,
                 'name': pathlib.Path(key).name,
+                'is_image': is_image,
+                'url': url,
+                'download_url': download_url,
+                'type': _type,
                 'size': size,
                 'updated': updated,
             }
