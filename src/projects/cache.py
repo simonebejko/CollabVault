@@ -7,8 +7,6 @@ def get_user_projects(username=None, limit=5, set_on_none=True):
         cache_str = f'_user_project_cache_{username}'
         projects_qs = django_cache.get(cache_str)
         if projects_qs is None and set_on_none:
-            projects_qs = Project.objects.filter(
-                    owner__username__iexact=username
-            ).order_by('-updated')[:limit]
+            projects_qs = Project.objects.has_access_by_username(username).order_by('-updated')[:limit]
             django_cache.set(cache_str, projects_qs)
     return projects_qs

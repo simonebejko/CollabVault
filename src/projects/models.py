@@ -3,6 +3,7 @@ from django.db import models
 from collabvault.utils.generators import unique_slugify
 from django.urls import reverse
 from . import validators
+from django.db.models import Q
 
 User = settings.AUTH_USER_MODEL
 
@@ -11,8 +12,45 @@ class AnonymousProject():
     value = None
     is_activated = False
 
+class ProjectUser(models.Model):
+    project = models.ForeignKey('Project', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    active = models.BooleanField(default=True)
+
+class ProjectQuerySet(models.QuerySet):
+    def has_access(self, user=None):
+        if user is None:
+            return self.none()
+        return self.filter(
+            Q(owner=user) |
+            Q(projectuser__user=user, 
+              projectuser__active=True)
+        )
+    
+    def has_access_by_username(self, username=None):
+        if username is None:
+            return self.none()
+        return self.filter(
+            Q(owner__username__iexact=username) |
+            Q(projectuser__user__username__iexact=username, 
+              projectuser__active=True)
+        )
+    
+class ProjectManager(models.Manager):
+    def get_queryset(self):
+        return ProjectQuerySet(self.model, using=self._db)
+    
+    def has_access(self, user=None):
+        return self.get_queryset().has_access(user=user)
+    
+    def has_access_by_username(self, username=None):
+        return self.get_queryset().has_access_by_username(username)
+
 class Project(models.Model):
     owner = models.ForeignKey(User, null=True, related_name='owned_projects', on_delete=models.SET_NULL)
+    users = models.ManyToManyField(User, blank=True, related_name='projects', through=ProjectUser)
     title = models.CharField(max_length=120, null=True)
     description = models.TextField(blank=True, null=True)
 
@@ -24,6 +62,8 @@ class Project(models.Model):
     
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    objects = ProjectManager()
 
     def __str__(self):
         return self.handle
