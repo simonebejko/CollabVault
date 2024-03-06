@@ -48,6 +48,9 @@ class Item(models.Model):
     def get_files_url(self):
         return reverse("items:files", kwargs={"id": self.id})
     
+    def get_upload_url(self):
+        return reverse("items:upload", kwargs={"id": self.id})
+    
     def get_edit_url(self):
         return reverse("items:edit", kwargs={"id": self.id})
     

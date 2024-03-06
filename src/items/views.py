@@ -5,18 +5,59 @@ from .models import Item
 from projects.decorators import project_required
 from django.urls import reverse
 from collabvault import http
-from django.http import QueryDict, HttpResponse
+from django.http import QueryDict, HttpResponse, JsonResponse
 import s3
 import pathlib
 from collabvault.env import config
 import mimetypes
 from django_htmx.http import HttpResponseClientRedirect
+from django.utils.text import slugify
 
 AWS_ACCESS_KEY_ID=config("AWS_ACCESS_KEY_ID", default=None)
 AWS_SECRET_ACCESS_KEY=config("AWS_SECRET_ACCESS_KEY", default=None)
 AWS_BUCKET_NAME=config("AWS_BUCKET_NAME", default=None)
 
 # Create your views here.
+def filename_to_s3_filename(fname):
+    if fname is None:
+        return None
+    if fname == '':
+        return None
+    stem = pathlib.Path(fname).stem
+    suffix = pathlib.Path(fname).suffix
+    stem_clean = slugify(stem).replace('-', '_')
+    return f'{stem_clean}{suffix}'
+
+@project_required
+@login_required
+def item_upload_view(request, id=None):
+    instance = get_object_or_404(Item, id=id, project=request.project)
+    template_name = 'items/file-upload.html'
+    if request.htmx:
+        template_name = 'items/snippets/upload.html'
+    if request.method == "POST":
+        print(request.POST)
+        file_name = request.POST.get('file_name')
+        name = filename_to_s3_filename(file_name)
+        if name is None:
+            """
+            Invalid name, alert user
+            """
+            return JsonResponse({"url": None})
+        client = s3.S3Client(
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+            default_bucket_name=AWS_BUCKET_NAME,
+        ).client
+        prefix = instance.get_prefix()
+        key = f"{prefix}{name}"
+        url = client.generate_presigned_url('put_object', Params={"Bucket": AWS_BUCKET_NAME, "Key": key}, ExpiresIn=3600)
+        return JsonResponse({"url": url, 'filename': name})
+    return render(request, template_name, 
+                    {
+                     "instance": instance}
+                )
+
 @project_required
 @login_required
 def item_file_delete_view(request, id=None, name=None):
