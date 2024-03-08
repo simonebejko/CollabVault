@@ -24,12 +24,8 @@ module.exports = {
       },
       white: colors.white,
       black: colors.black,
-      cv: {
-        "100": "1c2a30",
-      },
       cvBlue: {
-        "100": "#a8c4c8",
-        "900": "#6391a0",
+        "100": "#123c4e",
       },
       stone: colors.stone,
       sky: colors.sky,
@@ -38,7 +34,8 @@ module.exports = {
       blue: colors.blue,
       red: colors.red,
       green: colors.green,
-      neutral: colors.neutral
+      neutral: colors.neutral,
+      cyan: colors.cyan,
     },
     fontFamily: {
       'body': [
