@@ -1527,6 +1527,18 @@ input:checked + .toggle-bg {
   max-height: 80vh;
 }
 
+.max-h-\[60vh\] {
+  max-height: 60vh;
+}
+
+.max-h-\[40vh\] {
+  max-height: 40vh;
+}
+
+.max-h-\[50vh\] {
+  max-height: 50vh;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -1555,6 +1567,18 @@ input:checked + .toggle-bg {
   width: 100%;
 }
 
+.w-1 {
+  width: 0.25rem;
+}
+
+.w-1\/4 {
+  width: 25%;
+}
+
+.w-28 {
+  width: 7rem;
+}
+
 .max-w-2xl {
   max-width: 42rem;
 }
@@ -1565,6 +1589,38 @@ input:checked + .toggle-bg {
 
 .max-w-screen-xl {
   max-width: 1280px;
+}
+
+.max-w-\[50vh\] {
+  max-width: 50vh;
+}
+
+.max-w-\[10vh\] {
+  max-width: 10vh;
+}
+
+.max-w-\[80vh\] {
+  max-width: 80vh;
+}
+
+.max-w-\[20vh\] {
+  max-width: 20vh;
+}
+
+.max-w-\[120vh\] {
+  max-width: 120vh;
+}
+
+.max-w-\[100vh\] {
+  max-width: 100vh;
+}
+
+.max-w-\[1vh\] {
+  max-width: 1vh;
+}
+
+.max-w-\[4vh\] {
+  max-width: 4vh;
 }
 
 .flex-1 {
@@ -1711,6 +1767,30 @@ input:checked + .toggle-bg {
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
+.space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2rem * var(--tw-space-x-reverse));
+  margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-64 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(16rem * var(--tw-space-x-reverse));
+  margin-left: calc(16rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-32 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(8rem * var(--tw-space-x-reverse));
+  margin-left: calc(8rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-16 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(4rem * var(--tw-space-x-reverse));
+  margin-left: calc(4rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
@@ -1730,8 +1810,16 @@ input:checked + .toggle-bg {
   align-self: center;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 .overflow-x-auto {
@@ -1742,8 +1830,32 @@ input:checked + .toggle-bg {
   overflow-y: auto;
 }
 
+.overflow-x-visible {
+  overflow-x: visible;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.whitespace-normal {
+  white-space: normal;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
+}
+
+.break-words {
+  overflow-wrap: break-word;
+}
+
+.break-all {
+  word-break: break-all;
 }
 
 .rounded {
@@ -1881,6 +1993,11 @@ input:checked + .toggle-bg {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
+}
+
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 213 213 / var(--tw-bg-opacity));
 }
 
 .p-1 {
